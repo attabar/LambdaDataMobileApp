@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './src/screen/homeScreen';
+import LoginScreen from './src/screen/loginScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,7 @@ export default function App() {
         headerShown: false,
       }}>
         <Stack.Screen name={"HOME"} component={HomeScreen}/>
+        <Stack.Screen name={"LOGIN"} component={LoginScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
