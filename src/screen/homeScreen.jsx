@@ -5,8 +5,13 @@ import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
     const navigation = useNavigation();
+
     const handleLogin = () => {
         navigation.navigate("LOGIN")
+    }
+
+    const handleSignup = () => {
+        navigation.navigate("SIGNUP")
     }
     return(
         <View style={styles.container}>
@@ -22,7 +27,9 @@ const HomeScreen = () => {
                         onPress={handleLogin}>
                     <Text style={styles.loginButtonText}>Login</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.loginButtonWrapper}>
+                <TouchableOpacity 
+                    style={styles.loginButtonWrapper}
+                    onPress={handleSignup}>
                     <Text style={styles.signupButtonText}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
