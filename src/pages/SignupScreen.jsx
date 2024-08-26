@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, ScrollView, Alert } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, ScrollView, Alert, Button } from "react-native";
 import { colors } from "../utility/colors";
 import { fonts } from "../utility/fonts";
 import { useNavigation } from '@react-navigation/native';
@@ -8,56 +8,54 @@ const SignupScreen = () => {
 
     const navigation = useNavigation();
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
+    const [fullname, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [referral, setReferral] = useState('');
+    const [pin, setPin] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    
 
     const handleLogin = () => {
         navigation.navigate("LOGIN")
     }
 
     const handleSignup = () => {
-        if (password !== confirmPassword) {
-            Alert.alert("Error", "Passwords do not match");
-            return;
-        }
 
-        const userData = {
-            firstName,
-            lastName,
-            username,
-            email,
-            phone,
-            password,
-            confirmPassword
-        };
+        const formData = new URLSearchParams();
+         formData.append("fullname", fullname);
+         formData.append("email", email);
+         formData.append("phone", phone);
+         formData.append("referral", referral);
+         formData.append("pin", pin);
+         formData.append("password", password);
 
-        fetch('https://mikiyatech.com.ng/mikiyatech.com.ng/Registration.php', {
+        fetch('http://localhost:8081/php/Registration.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: JSON.stringify(userData)
+            body: formData.toString()
         })
-        .then(response => response.json())
-        .then(data => {
-            // Handle successful signup
-            console.log(data);
-            if(data.success){
-                Alert.alert("Success", data.message);
-            } else {
-                Alert.alert("Error: ", data.message)
+        .then(async (response) => {
+            try {
+                const data = await response.json(); // Attempt to parse JSON
+                if(data.success){
+                    Alert.alert("Success", data.message);
+                } else {
+                    Alert.alert("Error", data.message);
+                }
+            } catch (error) {
+                // If JSON parsing fails, handle the error
+                console.error("Parsing error:", error);
+                Alert.alert("Error", "Invalid response from server.");
             }
         })
         .catch(error => {
-            // Handle signup error
             console.error(error);
             Alert.alert("Error", "Something went wrong. Please try again later.");
         });
+        
     };
 
     return (
@@ -66,22 +64,61 @@ const SignupScreen = () => {
                 <Image source={require("../assets/yamboyLogo.jpg")} style={styles.logo} />
                 <Text style={{marginTop: 15}}>Register To Continue Enjoying!</Text>
                 <View style={styles.inputContainer}>
+
                     <Text style={styles.label}>Full Name</Text>
-                    <TextInput style={styles.input} placeholder='Full Name' value={firstName} onChangeText={setFirstName} />
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder='Muhammad Abdulmalik' 
+                        value={fullname} 
+                        onChangeText={setFullName} 
+                    />
+
                     <Text style={styles.label}>Email Address</Text>
-                    <TextInput style={styles.input} placeholder='Email Address' value={email} onChangeText={setEmail} keyboardType="email-address" />
-                    <Text style={styles.label}>Username</Text>
-                    <TextInput style={styles.input} placeholder='Username' value={username} onChangeText={setUsername} />
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder='Mabdulmalik353@gmail.com' 
+                        value={email} 
+                        onChangeText={setEmail} 
+                        keyboardType="email-address"
+                    />
+
                     <Text style={styles.label}>Phone Number</Text>
-                    <TextInput style={styles.input} placeholder='Phone Number' value={phone} onChange={setPhone} minLength={11}/>
-                    <Text style={styles.label}>Create Pin</Text>
-                    <TextInput style={styles.input} placeholder='Transaction Pin' value={lastName} onChangeText={setLastName} />
-                    <Text style={styles.label}>Password</Text>
-                    <TextInput style={styles.input} placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry />
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder='+2348149715017' 
+                        value={phone} 
+                        onChangeText={setPhone} 
+                        minLength={11} 
+                        keyboardType="numeric" 
+                    />
+
                     <Text style={styles.label}>Referral</Text>
-                    <TextInput style={styles.input} placeholder='Referral Code (Optional)' value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder='Referal Code (Optionl)' 
+                        value={referral} 
+                        onChangeText={setReferral} 
+                    />
+
+                    <Text style={styles.label}>Create Pin</Text>
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder='Transaction Pin' 
+                        value={pin} onChangeText={setPin} 
+                        keyboardType="numeric"
+                    />
+
+                    <Text style={styles.label}>Password</Text>
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder='Password' 
+                        value={password} 
+                        onChangeText={setPassword} 
+                        secureTextEntry 
+                    />
+
                     <TouchableOpacity style={styles.loginContainer} onPress={handleSignup}>
-                        <Text style={styles.signupText}>Sign Up</Text>
+                        <Button style={styles.signupText} title='Sign Up' />
                     </TouchableOpacity>
                     <Text style={styles.accountExist}>Already have an account? </Text><TouchableOpacity onPress={handleLogin}><Text style={{textAlign: 'center'}}>Login</Text></TouchableOpacity>
                 </View>

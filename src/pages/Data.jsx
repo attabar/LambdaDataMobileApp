@@ -90,23 +90,6 @@ export default function Data() {
   return (
     <View style={styles.container}>
       <ScrollView>
-
-      {/* <View style={[styles.sidebar, isSidebarOpen ? styles.sidebarOpen : styles.sidebarClosed]}>
-        <ScrollView style={styles.sidebarContent}>
-          <TouchableOpacity onPress={handleDashboard}>
-            <Text style={styles.menuItem}><Ionicons name="home-outline" size={20} /> Dashboard</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.menuItem}><Icon name="user" size={20} /> Account <Ionicons name="chevron-down-outline" size={20} /></Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.menuItem}><Ionicons name="cash-outline" size={20} /> Fund Wallet</Text>
-          </TouchableOpacity>
-        
-          
-        </ScrollView>
-      </View> */}
-
       <Text style={styles.transactionHistoryTitle}>DATA HISTORY</Text>  
       <View style={styles.transactionHistoryContainer}>
         <View style={styles.card}>
