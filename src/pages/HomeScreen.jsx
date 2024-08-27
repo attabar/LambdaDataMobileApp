@@ -1,19 +1,49 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons, FontAwesome } from 'react-native-vector-icons';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Ionicons, FontAwesome, MaterialCommunityIcons } from 'react-native-vector-icons';
 
 const HomeScreen = () => {
+  // state to control visibilty of balance
+  const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+
+  // function to toggle the balance visibility
+  const toggleBalanceVisibility = () => {
+    setIsBalanceVisible(!isBalanceVisible);
+  };
+
+  // Sample transactions data
+  const transactions = [
+    { id: 1, name: "Airtime Purchase", date: "2024-08-25", amount: "₦500" },
+    { id: 2, name: "Data Purchase", date: "2024-08-24", amount: "₦1000" },
+    { id: 3, name: "TV Subscription", date: "2024-08-23", amount: "₦1500" },
+  ];
+
   return (
     <View style={styles.container}>
-
       <View style={styles.balanceContainer}>
         <View style={styles.balanceContent}>
-          <Ionicons style={styles.icon} name="wallet" size={40} />
+          <Ionicons style={styles.icon} name="wallet" size={30} />
           <Text style={styles.balanceText}>Total Balance</Text>
-          <Text style={styles.balanceText}>₦0.00</Text>
+          <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Text style={styles.balanceText}>{isBalanceVisible ? '₦0.00' : '***'}</Text>
+            {/* Eye icon to toggle visibility */}
+            <TouchableOpacity onPress={toggleBalanceVisibility}>
+              <Ionicons 
+                name={isBalanceVisible ? 'eye' : 'eye-off'} 
+                size={20} 
+                color="white" 
+              />
+            </TouchableOpacity>
+          </View>
         </View>
+
+        <TouchableOpacity style={styles.fundContent}>
+          <MaterialCommunityIcons style={styles.icon} name="folder-plus-outline" size={30} />
+          <Text style={styles.balanceText}>Fund Wallet</Text>
+        </TouchableOpacity>
       </View>
 
+    <ScrollView>
       <Text style={styles.servicesTitle}>Our Services</Text>
       <View style={styles.servicesContainer}>
         <View style={styles.card}>
@@ -44,7 +74,34 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      <Text style={styles.recentTransactionTitle}>Recent Transactions</Text>
+      <View style={styles.transactions}>
+        <View style={styles.transactionTexts}>
+          <Text style={{ fontWeight: 'bold' }}>Recent Transactions</Text>
+          <TouchableOpacity style={{ backgroundColor: 'blue', padding: 5, borderRadius: 5 }}>
+            <Text style={{ color: '#fff' }}>View All</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Recent transactions table */}
+        <View style={styles.tableContainer}>
+          <View style={styles.tableHeader}>
+            <Text style={[styles.tableCell, styles.headerCell]}>Type</Text>
+            <Text style={[styles.tableCell, styles.headerCell]}>Date</Text>
+            <Text style={[styles.tableCell, styles.headerCell]}>Amount</Text>
+          </View>
+
+          <ScrollView style={styles.tableBody}>
+            {transactions.map((transaction) => (
+              <View key={transaction.id} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{transaction.name}</Text>
+                <Text style={styles.tableCell}>{transaction.date}</Text>
+                <Text style={styles.tableCell}>{transaction.amount}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -57,15 +114,21 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   balanceContainer: {
+    display: 'flex',
+    flexDirection: "row",
     backgroundColor: 'blue',
-    paddingVertical: 20,
+    paddingVertical: 5,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     borderRadius: 8,
     marginBottom: 20,
   },
   balanceContent: {
     alignItems: 'center',
+    justifyContent: 'center'
+  },
+  fundContent: {
+    alignItems: 'center'
   },
   icon: {
     color: 'white',
@@ -107,11 +170,43 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
-  recentTransactionTitle: {
+  transactions: {
+    backgroundColor: '#fff',
+    marginTop: 15,
+    paddingVertical: 30,
+    paddingHorizontal: 10,
+  },
+  transactionTexts: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     color: 'blue',
     fontWeight: 'bold',
-    fontSize: 18,
+  },
+  tableContainer: {
+    marginTop: 20,
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    backgroundColor: '#f4f4f4',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  tableBody: {
+    maxHeight: 200,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  tableCell: {
+    flex: 1,
     textAlign: 'center',
-    marginTop: 15
-  }
+  },
+  headerCell: {
+    fontWeight: 'bold',
+  },
 });

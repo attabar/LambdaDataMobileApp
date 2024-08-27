@@ -15,7 +15,6 @@ const SignupScreen = () => {
     const [pin, setPin] = useState('');
     const [password, setPassword] = useState('');
     
-
     const handleLogin = () => {
         navigation.navigate("LOGIN")
     }
