@@ -3,9 +3,10 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Alert,
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Dashboard from './src/pages/Dashboard'
 
 
-export default function Airtime() {
+export default function TvSub() {
 
   const [networkId, setNetworkId] = useState('');
   const [planId, setPlanId] = useState('');
@@ -92,27 +93,42 @@ export default function Airtime() {
       <ScrollView>
       
         <View style={styles.formContainer}>
-        <Text style={styles.heading}>Airtime Top Up</Text>
+        <Text style={styles.heading}>TV Sub Top Up</Text>
       <View style={styles.formGroup}>
         <Text style={styles.label}>
-          Network <Text style={styles.required}>*</Text>
+          Cable Name <Text style={styles.required}>*</Text>
         </Text>
         <Picker
           selectedValue={networkId}
           onValueChange={(itemValue) => setNetworkId(itemValue)}
           style={styles.input}
         >
-          <Picker.Item label="--Select Network--" value="" />
-          <Picker.Item label="MTN" value="1" />
-          <Picker.Item label="Airtel" value="3" />
-          <Picker.Item label="Glo" value="2" />
-          <Picker.Item label="9Mobile" value="6" />
+          <Picker.Item label="--Select Cable Name--" value="" />
+          <Picker.Item label="GOTV" value="" />
+          <Picker.Item label="DSTV" value="" />
+          <Picker.Item label="STARTIME" value="" />
         </Picker>
       </View>
 
       <View style={styles.formGroup}>
         <Text style={styles.label}>
-          Phone Number <Text style={styles.required}>*</Text>
+          Cable Plan <Text style={styles.required}>*</Text>
+        </Text>
+        <Picker
+          selectedValue={networkId}
+          onValueChange={(itemValue) => setNetworkId(itemValue)}
+          style={styles.input}
+        >
+          <Picker.Item label="--Select Cable Plan--" value="" />
+          <Picker.Item label="GOtv Max - 2700" value="" />
+          <Picker.Item label="DStv Yanga - 5100" value="" />
+          <Picker.Item label="DStv Compact - 15700" value="" />
+        </Picker>
+      </View>
+
+      <View style={styles.formGroup}>
+        <Text style={styles.label}>
+          Amount <Text style={styles.required}>*</Text>
         </Text>
         <TextInput
           style={styles.input}
@@ -123,37 +139,15 @@ export default function Airtime() {
         />
       </View>
 
-      <View style={styles.formGroup}>
-        <Text style={styles.label}>
-          Amount <Text style={styles.required}>*</Text>
-        </Text>
-        <TextInput
-          style={styles.input}
-          value={dataType}
-          onChangeText={setDataType}
-          editable={false}
-        />
-      </View>
-
-      <View style={styles.formGroup}>
-        <Text style={styles.label}>
-          Amount To Pay <Text style={styles.required}>*</Text>
-        </Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="numeric"
-          value={amount}
-          onChangeText={setAmount}
-          editable={false}
-        />
-      </View>
-
       <TouchableOpacity onPress={handleSubmit} style={styles.button} disabled={isSubmitting}>
         <Text style={styles.buttonText}>{isSubmitting ? 'Processing...' : 'Top Up'}</Text>
       </TouchableOpacity>
       </View>
       </ScrollView>
+      
     </View>
+    
+    
   );
 }
 

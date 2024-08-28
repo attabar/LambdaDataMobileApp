@@ -90,37 +90,9 @@ export default function Data() {
   return (
     <View style={styles.container}>
       <ScrollView>
-      <Text style={styles.transactionHistoryTitle}>DATA HISTORY</Text>  
-      <View style={styles.transactionHistoryContainer}>
-        <View style={styles.card}>
-        <TouchableOpacity style={styles.serviceItem}>
-          {/* <Ionicons name="wifi-outline" size={20} /> */}
-          <Image source={require("../assets/mtn.jpeg")} style={styles.image}/>
-          <Text style={styles.menuItem}>MTN</Text>
-        </TouchableOpacity>
-
-        
-        <TouchableOpacity style={styles.serviceItem}>
-          {/* <Ionicons name="call-outline" size={20} />  */}
-          <Image source={require("../assets/airtel.jpeg")} style={styles.image}/>
-          <Text style={styles.menuItem}>AIRTEL</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.serviceItem}>
-          {/* <Ionicons name="tv-outline" size={20} /> */}
-          <Image source={require("../assets/glo.jpeg")} style={styles.image}/>
-          <Text style={styles.menuItem}>GLO</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.serviceItem}>
-          {/* <Ionicons name="bulb-outline" size={20} /> */}
-          <Image source={require("../assets/9mobile.jpeg")} style={styles.image}/>
-          <Text style={styles.menuItem}>9MOBILE</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      
         <View style={styles.formContainer}>
-        <Text style={styles.heading}>Buy Data</Text>
+        <Text style={styles.heading}>Data Top Up</Text>
       <View style={styles.formGroup}>
         <Text style={styles.label}>
           Network <Text style={styles.required}>*</Text>
@@ -191,7 +163,7 @@ export default function Data() {
       </View>
 
       <TouchableOpacity onPress={handleSubmit} style={styles.button} disabled={isSubmitting}>
-        <Text style={styles.buttonText}>{isSubmitting ? 'Processing...' : 'Purchase'}</Text>
+        <Text style={styles.buttonText}>{isSubmitting ? 'Processing...' : 'Top Up'}</Text>
       </TouchableOpacity>
       </View>
       </ScrollView>
@@ -202,23 +174,24 @@ export default function Data() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
+    // paddingHorizontal: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    backgroundColor: '#fff'
   },
   formContainer: {
     borderRadius: 15,
-    marginTop: 10,
+    marginTop: 15,
     flexGrow: 1,
     backgroundColor: "blue",
     justifyContent: "center",
     alignItems: "center",
-    padding: 20
+    padding: 15
   },
   heading: {
     fontSize: 24,
     color: '#fff',
-    marginVertical: 15,
+    marginVertical: 10,
   },
   formGroup: {
     width: '90%',
@@ -234,15 +207,16 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    padding: 10,
+    paddingVertical: 10,
     backgroundColor: '#fff',
-    borderRadius: 15,
+    borderRadius: 10,
+    color: '#000'
   },
   button: {
     width: '90%',
-    padding: 10,
+    paddingVertical: 10,
     backgroundColor: '#fff',
-    borderRadius: 15,
+    borderRadius: 10,
     alignItems: 'center',
   },
   buttonText: {

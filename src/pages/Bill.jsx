@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-export default function Airtime() {
+
+export default function Bill() {
 
   const [networkId, setNetworkId] = useState('');
   const [planId, setPlanId] = useState('');
@@ -92,27 +93,34 @@ export default function Airtime() {
       <ScrollView>
       
         <View style={styles.formContainer}>
-        <Text style={styles.heading}>Airtime Top Up</Text>
+        <Text style={styles.heading}>Bill Top Up</Text>
       <View style={styles.formGroup}>
         <Text style={styles.label}>
-          Network <Text style={styles.required}>*</Text>
+          Disco Name <Text style={styles.required}>*</Text>
         </Text>
         <Picker
           selectedValue={networkId}
           onValueChange={(itemValue) => setNetworkId(itemValue)}
           style={styles.input}
         >
-          <Picker.Item label="--Select Network--" value="" />
-          <Picker.Item label="MTN" value="1" />
-          <Picker.Item label="Airtel" value="3" />
-          <Picker.Item label="Glo" value="2" />
-          <Picker.Item label="9Mobile" value="6" />
+          <Picker.Item label="--Select Disco Name--" value="" />
+          <Picker.Item label="Ikeja Electric" value="" />
+          <Picker.Item label="Eko Electric" value="" />
+          <Picker.Item label="Abuja Electric" value="" />
+          <Picker.Item label="Kano Electric" value="" />
+          <Picker.Item label="Enugu Electric" value="" />
+          <Picker.Item label="Port Harcourt Electric" value="" />
+          <Picker.Item label="Ibadan Electric" value="" />
+          <Picker.Item label="Kaduna Electric" value="" />
+          <Picker.Item label="Jos Electric" value="" />
+          <Picker.Item label="Benin Electric" value="" />
+          <Picker.Item label="Yola Electric" value="" />
         </Picker>
       </View>
 
       <View style={styles.formGroup}>
         <Text style={styles.label}>
-          Phone Number <Text style={styles.required}>*</Text>
+          Amount <Text style={styles.required}>*</Text>
         </Text>
         <TextInput
           style={styles.input}
@@ -125,7 +133,7 @@ export default function Airtime() {
 
       <View style={styles.formGroup}>
         <Text style={styles.label}>
-          Amount <Text style={styles.required}>*</Text>
+          Meter Number <Text style={styles.required}>*</Text>
         </Text>
         <TextInput
           style={styles.input}
@@ -137,23 +145,29 @@ export default function Airtime() {
 
       <View style={styles.formGroup}>
         <Text style={styles.label}>
-          Amount To Pay <Text style={styles.required}>*</Text>
+          Meter Type <Text style={styles.required}>*</Text>
         </Text>
-        <TextInput
+        <Picker
+          selectedValue={networkId}
+          onValueChange={(itemValue) => setNetworkId(itemValue)}
           style={styles.input}
-          keyboardType="numeric"
-          value={amount}
-          onChangeText={setAmount}
-          editable={false}
-        />
+        >
+          <Picker.Item label="--Select Meter Type--" value="" />
+          <Picker.Item label="Prepaid" value="" />
+          <Picker.Item label="Postpaid" value="" />
+        </Picker>
       </View>
+
 
       <TouchableOpacity onPress={handleSubmit} style={styles.button} disabled={isSubmitting}>
         <Text style={styles.buttonText}>{isSubmitting ? 'Processing...' : 'Top Up'}</Text>
       </TouchableOpacity>
       </View>
       </ScrollView>
+      
     </View>
+    
+    
   );
 }
 

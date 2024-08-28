@@ -1,0 +1,29 @@
+<Text style={styles.transactionHistoryTitle}>DATA HISTORY</Text>  
+      <View style={styles.transactionHistoryContainer}>
+        <View style={styles.card}>
+        <TouchableOpacity style={styles.serviceItem}>
+          {/* <Ionicons name="wifi-outline" size={20} /> */}
+          <Image source={require("../assets/mtn.jpeg")} style={styles.image}/>
+          <Text style={styles.menuItem}>MTN</Text>
+        </TouchableOpacity>
+
+        
+        <TouchableOpacity style={styles.serviceItem}>
+          {/* <Ionicons name="call-outline" size={20} />  */}
+          <Image source={require("../assets/airtel.jpeg")} style={styles.image}/>
+          <Text style={styles.menuItem}>AIRTEL</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.serviceItem}>
+          {/* <Ionicons name="tv-outline" size={20} /> */}
+          <Image source={require("../assets/glo.jpeg")} style={styles.image}/>
+          <Text style={styles.menuItem}>GLO</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.serviceItem}>
+          {/* <Ionicons name="bulb-outline" size={20} /> */}
+          <Image source={require("../assets/9mobile.jpeg")} style={styles.image}/>
+          <Text style={styles.menuItem}>9MOBILE</Text>
+          </TouchableOpacity>
+        </View>
+      </View>

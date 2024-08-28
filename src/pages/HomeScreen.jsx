@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons, FontAwesome, MaterialCommunityIcons } from 'react-native-vector-icons';
-
+import { useNavigation } from '@react-navigation/native'
 const HomeScreen = () => {
   // state to control visibilty of balance
   const [isBalanceVisible, setIsBalanceVisible] = useState(true);
@@ -17,6 +17,12 @@ const HomeScreen = () => {
     { id: 2, name: "Data Purchase", date: "2024-08-24", amount: "₦1000" },
     { id: 3, name: "TV Subscription", date: "2024-08-23", amount: "₦1500" },
   ];
+
+  const navigation = useNavigation();
+
+  const navigateToBillScreen = () => {
+    navigation.navigate("BILL")
+  }
 
   return (
     <View style={styles.container}>
@@ -55,7 +61,7 @@ const HomeScreen = () => {
             <Ionicons name="call" size={30} style={styles.serviceIcon} />
             <Text style={styles.serviceText}>Airtime</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.serviceItem}>
+          <TouchableOpacity style={styles.serviceItem} onPress={navigateToBillScreen}>
             <Ionicons name="bulb" size={30} style={styles.serviceIcon} />
             <Text style={styles.serviceText}>Bill</Text>
           </TouchableOpacity>

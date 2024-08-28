@@ -10,6 +10,7 @@ import LoginScreen from './src/pages/LoginScreen';
 import SignupScreen from './src/pages/SignupScreen';
 import Dashboard from './src/pages/Dashboard';
 import Data from './src/pages/Data';
+import Bill from './src/pages/Bill'
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,7 @@ export default function App() {
           <Stack.Screen name={"SIGNUP"} component={SignupScreen} />
           <Stack.Screen name={"DASHBOARD"} component={Dashboard} />
           <Stack.Screen name={"DATA"} component={Data} />
+          <Stack.Screen name={"BILL"} component={Bill} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
