@@ -1,60 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import Entypo from '@expo/vector-icons/Entypo';
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from './src/pages/OnboardingScreen';
-import LoginScreen from './src/pages/LoginScreen';
-import SignupScreen from './src/pages/SignupScreen';
-import Dashboard from './src/pages/Dashboard';
-import Data from './src/pages/Data';
-import Bill from './src/pages/Bill'
+import OnboardingScreen  from './src/pages/OnboardingScreen';
+import { useEffect, useState } from 'react';
+import Splash from './splash';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
+ 
+  const [isShowSplash, setIsShowSplash] = useState(true);
 
   useEffect(() => {
-    async function prepare() {
-      try {
-        // Keep splash screen visible while loading resources
-        await SplashScreen.preventAutoHideAsync();
-
-        // Load fonts or other assets
-        await Font.loadAsync(Entypo.font);
-
-        // Optional delay for demonstration (remove in production)
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // Indicate that the app is ready
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
-  }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      // Hide splash screen when the app is ready
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;  // Don't render anything until the app is ready
-  }
+    setTimeout(() => {
+      setIsShowSplash(false)
+    }, 3000)
+  })
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      {/* <Text>SplashScreen Demo! 👋</Text>
-      <Entypo name="rocket" size={30} /> */}
-      <NavigationContainer>
+    <>
+    { isShowSplash ? <Splash /> : <OnboardingScreen /> }
+    {/* <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name={"HOME"} component={HomeScreen} />
           <Stack.Screen name={"LOGIN"} component={LoginScreen} />
@@ -63,7 +28,7 @@ export default function App() {
           <Stack.Screen name={"DATA"} component={Data} />
           <Stack.Screen name={"BILL"} component={Bill} />
         </Stack.Navigator>
-      </NavigationContainer>
-    </View>
-  );
+      </NavigationContainer> */}
+    </>
+  )
 }

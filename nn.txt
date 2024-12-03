@@ -1,0 +1,32 @@
+weruiop
+how do organise the Stack NavigationContainer and the show of splash and onboarding
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+how seperate navbar-brand & navbar-nav i.e justify-content-center
+
+give proper security measure at the frontend before form submission
+
+i want to host my software, so i want you to check my backend codes for finding and fixing vulnerabilities
+
+Malik@306
+
+npx expo start
+yarn add expo
+npm install --globally expo-cli
+git add .
+git commit -m 
+git push origin master
+
+<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      {/* <Text>SplashScreen Demo! 👋</Text>
+      <Entypo name="rocket" size={30} /> */}
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name={"HOME"} component={HomeScreen} />
+          <Stack.Screen name={"LOGIN"} component={LoginScreen} />
+          <Stack.Screen name={"SIGNUP"} component={SignupScreen} />
+          <Stack.Screen name={"DASHBOARD"} component={Dashboard} />
+          <Stack.Screen name={"DATA"} component={Data} />
+          <Stack.Screen name={"BILL"} component={Bill} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
