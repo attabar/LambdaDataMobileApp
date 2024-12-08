@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from "../utility/colors"; // Adjust import based on your project structure
-import { fonts } from "../utility/fonts"; // Adjust import based on your project structure
 
 const LoginScreen = () => {
 
