@@ -1,6 +1,6 @@
 weruiop
 how do organise the Stack NavigationContainer and the show of splash and onboarding
-A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+EIOPQRUW
 how seperate navbar-brand & navbar-nav i.e justify-content-center
 
 give proper security measure at the frontend before form submission
@@ -9,6 +9,7 @@ i want to host my software, so i want you to check my backend codes for finding 
 
 Malik@306
 
+npm install @react-native-async-storage/async-storage
 npx expo start
 yarn add expo
 npm install --globally expo-cli

@@ -6,7 +6,7 @@ export default function Splash() {
     return(
         <View style={styles.container}>
             <View>
-                <Text style={{color: 'white', fontSize: 25, marginVertical: 10}}>Welcome To Yamboy Sub</Text>
+                <Text style={{color: 'white', fontSize: 20, marginVertical: 10}}>Welcome To Yamboy Sub</Text>
             </View>
             <View>
                 <Image 
