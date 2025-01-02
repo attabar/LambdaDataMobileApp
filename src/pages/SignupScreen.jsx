@@ -23,17 +23,17 @@ const SignupScreen = () => {
     
             <View style={{marginTop: 20}}>
               <Text style={{fontSize: 27, fontWeight: "bold", color: colors.dark}}>
-                CREATE ACCOUNT,
+                CREATE ACCOUNT
               </Text>
               <Text style={{fontSize: 19, fontWeight: "bold", color: colors.light}}>
-                Sign Up
+                Provide your Credentials
               </Text>
             </View>
 
             <View style={{marginTop: 10}}>
               <View style={styles.inputContainer}>
                 <Icon 
-                  name="mail-outline" 
+                  name="person-outline" 
                   size={20} 
                   color={colors.light} 
                   style={styles.inputIcon}
@@ -64,6 +64,30 @@ const SignupScreen = () => {
                 />
                 <TextInput placeholder='Phone' style={styles.input}/>
               </View>
+            </View>
+
+            <View style={{marginTop: 10}}>
+              <View style={styles.inputContainer}>
+                <Icon 
+                  name="person-outline" 
+                  size={20} 
+                  color={colors.light} 
+                  style={styles.inputIcon}
+                />
+                <TextInput placeholder='Referral' style={styles.input}/>
+              </View>
+            </View>
+
+            <View style={{marginTop: 10}}>
+            <View style={styles.inputContainer}>
+              <Icon 
+                name="lock-outline" 
+                size={20} 
+                color={colors.light} 
+                style={styles.inputIcon}
+              />
+              <TextInput placeholder='Create Pin' style={styles.input} secureTextEntry/>
+            </View>
             </View>
     
             <View style={{marginTop: 10}}>
@@ -112,7 +136,7 @@ const styles = StyleSheet.create({
     btnPrimary: {
       backgroundColor: colors.primary, 
       height: 50,
-      marginTop: 50,
+      marginTop: 20,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 5
