@@ -1,185 +1,121 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, ScrollView, Alert, Button } from "react-native";
-import { colors } from "../utility/colors";
-import { fonts } from "../utility/fonts";
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Text, TextInput, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native'
+import  {colors} from "../utility/colors"; // Adjust import based on your project structure
+import Icon  from 'react-native-vector-icons/MaterialIcons';
+
+
 
 const SignupScreen = () => {
 
     const navigation = useNavigation();
 
-    const [fullname, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [referral, setReferral] = useState('');
-    const [pin, setPin] = useState('');
-    const [password, setPassword] = useState('');
-    
-    const handleLogin = () => {
+    const navigateToLoginScreen = () => {
         navigation.navigate("LOGIN")
     }
-
-    const handleSignup = () => {
-
-        const formData = new URLSearchParams();
-         formData.append("fullname", fullname);
-         formData.append("email", email);
-         formData.append("phone", phone);
-         formData.append("referral", referral);
-         formData.append("pin", pin);
-         formData.append("password", password);
-
-        fetch('http://localhost:8081/php/Registration.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formData.toString()
-        })
-        .then(async (response) => {
-            try {
-                const data = await response.json(); // Attempt to parse JSON
-                if(data.success){
-                    Alert.alert("Success", data.message);
-                } else {
-                    Alert.alert("Error", data.message);
-                }
-            } catch (error) {
-                // If JSON parsing fails, handle the error
-                console.error("Parsing error:", error);
-                Alert.alert("Error", "Invalid response from server.");
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            Alert.alert("Error", "Something went wrong. Please try again later.");
-        });
-        
-    };
-
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.formContainer}>
-                <Image source={require("../assets/yamboyLogo.jpg")} style={styles.logo} />
-                <Text style={{marginTop: 15}}>Register To Continue Enjoying!</Text>
-                <View style={styles.inputContainer}>
-
-                    <Text style={styles.label}>Full Name</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='Muhammad Abdulmalik' 
-                        value={fullname} 
-                        onChangeText={setFullName} 
-                    />
-
-                    <Text style={styles.label}>Email Address</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='Mabdulmalik353@gmail.com' 
-                        value={email} 
-                        onChangeText={setEmail} 
-                        keyboardType="email-address"
-                    />
-
-                    <Text style={styles.label}>Phone Number</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='+2348149715017' 
-                        value={phone} 
-                        onChangeText={setPhone} 
-                        minLength={11} 
-                        keyboardType="numeric" 
-                    />
-
-                    <Text style={styles.label}>Referral</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='Referal Code (Optionl)' 
-                        value={referral} 
-                        onChangeText={setReferral} 
-                    />
-
-                    <Text style={styles.label}>Create Pin</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='Transaction Pin' 
-                        value={pin} onChangeText={setPin} 
-                        keyboardType="numeric"
-                    />
-
-                    <Text style={styles.label}>Password</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='Password' 
-                        value={password} 
-                        onChangeText={setPassword} 
-                        secureTextEntry 
-                    />
-
-                    <TouchableOpacity style={styles.loginContainer} onPress={handleSignup}>
-                        <Button style={styles.signupText} title='Sign Up' />
-                    </TouchableOpacity>
-                    <Text style={styles.accountExist}>Already have an account? </Text><TouchableOpacity onPress={handleLogin}><Text style={{textAlign: 'center'}}>Login</Text></TouchableOpacity>
-                </View>
+        <SafeAreaView style={{paddingHorizontal: 20, backgroundColor: colors.dark}}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+    
+            <View style={{flexDirection: "row", marginTop: 40}}>
+              <Text style={{fontWeight: "bold", fontSize: 22, color: colors.dark}}>Yamboy</Text>
+              <Text style={{fontWeight: "bold", fontSize: 22, color: colors.secondary}}>Sub</Text>
             </View>
-        </ScrollView>
-    );
+    
+            <View style={{marginTop: 20}}>
+              <Text style={{fontSize: 27, fontWeight: "bold", color: colors.dark}}>
+                CREATE ACCOUNT,
+              </Text>
+              <Text style={{fontSize: 19, fontWeight: "bold", color: colors.light}}>
+                Sign Up
+              </Text>
+            </View>
+
+            <View style={{marginTop: 10}}>
+              <View style={styles.inputContainer}>
+                <Icon 
+                  name="mail-outline" 
+                  size={20} 
+                  color={colors.light} 
+                  style={styles.inputIcon}
+                />
+                <TextInput placeholder='Full Name' style={styles.input}/>
+              </View>
+            </View>
+    
+            <View style={{marginTop: 10}}>
+              <View style={styles.inputContainer}>
+                <Icon 
+                  name="mail-outline" 
+                  size={20} 
+                  color={colors.light} 
+                  style={styles.inputIcon}
+                />
+                <TextInput placeholder='Email' style={styles.input}/>
+              </View>
+            </View>
+
+            <View style={{marginTop: 10}}>
+              <View style={styles.inputContainer}>
+                <Icon 
+                  name="mail-outline" 
+                  size={20} 
+                  color={colors.light} 
+                  style={styles.inputIcon}
+                />
+                <TextInput placeholder='Phone' style={styles.input}/>
+              </View>
+            </View>
+    
+            <View style={{marginTop: 10}}>
+            <View style={styles.inputContainer}>
+              <Icon 
+                name="lock-outline" 
+                size={20} 
+                color={colors.light} 
+                style={styles.inputIcon}
+              />
+              <TextInput placeholder='Password' style={styles.input} secureTextEntry/>
+            </View>
+            </View>
+    
+            <View style={styles.btnPrimary}>
+              <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 18}}>Sign In</Text>  
+            </View>  
+    
+            <TouchableOpacity onPress={navigateToLoginScreen} style={{marginTop: 10, alignItems: 'center'}}>
+          <Text>Already have an account ? Login Now</Text>
+        </TouchableOpacity>           
+              
+          </ScrollView>
+        </SafeAreaView>
+      );
 };
 
 export default SignupScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'blue',
-        flexGrow: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        paddingVertical: 50,
-    },
-    formContainer: {
-        alignItems: "center",
-        backgroundColor: colors.white,
-        width: "90%",
-        padding: 20,
-        borderRadius: 10
-    },
-    logo: {
-        width: 50,
-        height: 50,
-        borderRadius: 50
-    },
-    label: {
-        position: "relative",
-        right: 5,
-        marginVertical: 5,
-    },
-    input: {
-        borderWidth: 2,
-        borderColor: "blue",
-        padding: 10,
-        borderRadius: 10,
-        width: 260,
-        marginVertical: 5,
-    },
     inputContainer: {
-        marginTop: 20
+      flexDirection: 'row',
+      marginTop: 20
     },
-    loginContainer: {
-        backgroundColor: 'blue',
-        height: 50,
-        borderRadius: 10,
-        marginTop: 10,
-        textAlign: 'center',
-        alignItems: "center",
-        justifyContent: "center",
-        // width: "100%"
+    inputIcon: {
+      marginTop: 5,
+      position: "absolute",
+    }, 
+    input: {
+      color: colors.light,
+      paddingLeft: 50,
+      borderBottomWidth: 1,
+      flex: 1,
+      fontSize: 15
     },
-    signupText: {
-        color: '#fff',
-        fontFamily: fonts.Bold
-    },
-    accountExist: {
-        marginVertical: 5,
-        textAlign: 'center'
+    btnPrimary: {
+      backgroundColor: colors.primary, 
+      height: 50,
+      marginTop: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 5
     }
-});
+  });
+  
