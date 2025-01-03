@@ -216,3 +216,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+// try{
+    //   let fetch = await fetch();
+    //   let data = await fetch.json();
+
+    //   console.warn(data)
+    // } catch (error) {
+    //   console.warn(error)
+    // }
