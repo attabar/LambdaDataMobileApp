@@ -12,11 +12,15 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
-  const navigateToSignUpScreen = () => {
-    navigation.navigate("SIGNUP")
+  // const navigateToSignUpScreen = () => {
+  //   navigation.navigate("SIGNUP")
+  // }
+
+  const navigateToTabScreen = () => {
+    navigation.navigate("TabScreen")
   }
 
-  const handleSubmit = async () => {
+  const handleLogin = async () => {
     try {
       const url = "https://mikiyatech.com.ng/mikiyatech.com.ng/user/assets/PHP/login.php";
       let formData = new FormData();
@@ -88,7 +92,7 @@ const LoginScreen = () => {
         </View>
         </View>
 
-        <TouchableOpacity style={styles.btnPrimary} onPress={handleSubmit}>
+        <TouchableOpacity style={styles.btnPrimary} onPress={handleLogin}>
           <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 18}}>Sign In</Text>  
         </TouchableOpacity>  
     
@@ -125,7 +129,7 @@ const LoginScreen = () => {
             marginTop: 40, 
             marginBottom: 20}}>
               <Text style={{color: colors.light, fontWeight: "bold"}}>Don't have an account?</Text>
-              <TouchableOpacity onPress={navigateToSignUpScreen}>
+              <TouchableOpacity onPress={navigateToTabScreen}>
                 <Text style={{color: colors.pink, fontWeight: "bold"}}> Sign Up</Text>
               </TouchableOpacity> 
           </View>

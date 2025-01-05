@@ -5,6 +5,8 @@ import SignupScreen  from './src/pages/SignupScreen';
 import OnboardingScreen from './src/pages/OnboardingScreen';
 import { useEffect, useState } from 'react';
 import Splash from './splash';
+import TabScreen from './src/pages/TabScreen.jsx';
+
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
@@ -18,7 +20,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       setIsShowSplash(false)
-    }, 5000);
+    }, 2000);
   },[]);
 
   // useEffect(async () => {
@@ -41,7 +43,7 @@ export default function App() {
               <Stack.Screen name={"OnboardingScreen"} component={OnboardingScreen} />
               <Stack.Screen name={"LOGIN"} component={LoginScreen} />
               <Stack.Screen name={"SIGNUP"} component={SignupScreen} />
-              
+              <Stack.Screen name={"TabScreen"} component={TabScreen} />
             </Stack.Navigator>
         )}
         </NavigationContainer>

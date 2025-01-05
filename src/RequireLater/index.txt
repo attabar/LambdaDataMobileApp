@@ -1,0 +1,36 @@
+  // Sample transactions data
+  const transactions = [
+    { id: 1, network: "../assets/mtn.jpeg", name: "Airtime Purchase", date: "2024-08-25", amount: "₦500" },
+    { id: 2 , network: "../assets/mtn.jpeg", name: "Data Purchase", date: "2024-08-24", amount: "₦1000" },
+    { id: 3, network: "../assets/mtn.jpeg", name: "TV Subscription", date: "2024-08-23", amount: "₦1500" },
+  ];
+  
+      <View style={styles.transactions}>
+        <View style={styles.transactionTexts}>
+          <Text style={{ fontWeight: 'bold' }}>Recent Transactions</Text>
+          <TouchableOpacity style={{ backgroundColor: 'blue', padding: 5, borderRadius: 5 }}>
+            <Text style={{ color: '#fff' }}>View All</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Recent transactions table */}
+        <View style={styles.tableContainer}>
+          <View style={styles.tableHeader}>
+            <Text style={[styles.tableCell, styles.headerCell]}>Type</Text>
+            <Text style={[styles.tableCell, styles.headerCell]}>Date</Text>
+            <Text style={[styles.tableCell, styles.headerCell]}>Amount</Text>
+            
+          </View>
+
+          <ScrollView style={styles.tableBody}>
+            {transactions.map((transaction) => (
+              <View key={transaction.id} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{transaction.name}</Text>
+                <Text style={styles.tableCell}>{transaction.date}</Text>
+                <Text style={styles.tableCell}>{transaction.amount}</Text>
+                
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+      </View>

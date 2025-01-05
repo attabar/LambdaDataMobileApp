@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Alert,
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { colors } from '../utility/colors';
 
 
 export default function Data() {
@@ -102,7 +103,7 @@ export default function Data() {
           onValueChange={(itemValue) => setNetworkId(itemValue)}
           style={styles.input}
         >
-          <Picker.Item label="--Select Network--" value="" />
+          <Picker.Item  label="--Select Network--" value="" />
           <Picker.Item label="MTN" value="1" />
           <Picker.Item label="Airtel" value="3" />
           <Picker.Item label="Glo" value="2" />
@@ -183,23 +184,23 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 15,
     flexGrow: 1,
-    backgroundColor: "blue",
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignItems: "center",
     padding: 15
   },
   heading: {
     fontSize: 24,
-    color: '#fff',
+    color: '#000',
     marginVertical: 10,
   },
   formGroup: {
-    width: '90%',
+    width: '100%',
     marginBottom: 15,
   },
   label: {
     fontSize: 16,
-    color: '#fff',
+    color: '#000',
     marginBottom: 5,
   },
   required: {
@@ -208,9 +209,11 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     paddingVertical: 10,
-    backgroundColor: '#fff',
+    // backgroundColor: '#000',
     borderRadius: 10,
-    color: '#000'
+    color: '#000',
+    borderColor: colors.primary,
+    borderWidth: 2
   },
   button: {
     width: '90%',

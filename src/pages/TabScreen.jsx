@@ -1,26 +1,27 @@
-// src/pages/Dashboard.js
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Data from './Data';
 import Airtime from './Airtime';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
 import Setting from './Setting';
 import Fund from './Fund';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { colors } from '../utility/colors';
+// import HomeScreen from './HomeScreen';
 
 const Tab = createBottomTabNavigator();
 
-export default function Dashboard() {
+export default function TabScreen() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={ ({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Data') {
-            iconName = focused ? 'cloud' : 'cloud-outline';
+            iconName = focused ? 'cloud' : 'wifi-outline';
           } else if (route.name === 'Airtime') {
             iconName = focused ? 'phone-portrait' : 'phone-portrait-outline';
           }
@@ -35,11 +36,11 @@ export default function Dashboard() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'tomato',
+        activeTintColor: colors.primary,
         inactiveTintColor: 'gray',
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
       <Tab.Screen name="Data" component={Data} />
       <Tab.Screen name="Airtime" component={Airtime} />
       <Tab.Screen name="Fund" component={Fund} />

@@ -15,7 +15,9 @@ yarn add expo
 npm install --globally expo-cli
 git add .
 git commit -m 
-git push origin master
+
+
+
 
 mport { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, ScrollView, Alert, Button } from "react-native";
 import { colors } from "../utility/colors";
