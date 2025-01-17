@@ -353,3 +353,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+//     let formData = new FormData();
+
+    //     const value1 = setEmail(email);
+    //     const value2 = setPass(pass);
+
+    //     formData.append("email", value1);
+    //     formData.append("password", value2);
+  
+    //     let response = await fetch(url, {
+    //       method: "POST",
+    //       body: formData
+    //     });
+
+    //     data = await response.json();
+  
+    //     if(data.success){
+    //       console.warn(data.message);
+    //     }

@@ -2,7 +2,8 @@ import { StyleSheet, View, Text, TextInput, SafeAreaView, ScrollView, TouchableO
 import  {colors} from "../utility/colors";``
 import Icon  from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 const LoginScreen = () => {
@@ -10,7 +11,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [password, setPassword] = useState('');
 
   // const navigateToSignUpScreen = () => {
   //   navigation.navigate("SIGNUP")
@@ -21,24 +22,25 @@ const LoginScreen = () => {
   }
 
   const handleLogin = async () => {
-    try {
-      const url = "https://mikiyatech.com.ng/mikiyatech.com.ng/user/assets/PHP/login.php";
-      let formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", pass)
-      let result = await fetch(url, {
-        method: "POST",
-        body: formData
-      })
-      result = await result.json();
+  
+    let formData = {
+      email: email,
+      password: password
+    }
 
-      if(result){
-        console.warn("Login Successfully");
-      } 
-    } catch (error) {
-      console.warn(error); 
+    const endpoint = "http://192.168.56.1:8080/endpoints/mobileLogin.php";
+
+    try{
+        
+      const response = await axios.post(endpoint, formData);
+      console.warn(response.status);
+      
+    }catch (error) {
+      console.warn(error);
     }
   }
+
+  
 
   return (
     <SafeAreaView style={{paddingHorizontal: 20, flex: 1, backgroundColor: colors.dark}}>
@@ -86,8 +88,8 @@ const LoginScreen = () => {
           <TextInput 
             placeholder='Password' 
             style={styles.input} 
-            onChangeText={(text) => setPass(text)}
-            value={pass}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
             secureTextEntry/>
         </View>
         </View>
