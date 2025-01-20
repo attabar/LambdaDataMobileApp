@@ -1,10 +1,11 @@
 import React from 'react';
-import Data from './Data';
-import Airtime from './Airtime';
+import ContactScreen from './ContactScreen';
+import HistoryScreen from './HistoryScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './HomeScreen';
-import Setting from './Setting';
-import Fund from './Fund';
+import ProfileScreen from './ProfileScreen';
+// https://oblador.github.io/react-native-vector-icons/
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors } from '../utility/colors';
 // import HomeScreen from './HomeScreen';
@@ -20,17 +21,17 @@ export default function TabScreen() {
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Data') {
-            iconName = focused ? 'cloud' : 'wifi-outline';
-          } else if (route.name === 'Airtime') {
-            iconName = focused ? 'phone-portrait' : 'phone-portrait-outline';
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'person' : 'person-outline';
+          } else if (route.name === 'History') {
+            iconName = focused ? 'time' : 'time-outline';
           }
-          else if (route.name === 'Fund') {
-            iconName = focused ? 'wallet' : 'wallet-outline';
-          }
-           else if (route.name === 'Setting') {
-            iconName = focused ? 'settings' : 'settings-outline';
-          }
+          if (route.name === 'Contact') {
+            return <FontAwesome name="whatsapp" size={size} color={color} />;
+        }
+          //  else if (route.name === 'Setting') {
+          //   iconName = focused ? 'settings' : 'settings-outline';
+          // }
 
           return <Icon name={iconName} size={size} color={color} />;
         },
@@ -41,10 +42,10 @@ export default function TabScreen() {
       }}
     >
       <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
-      <Tab.Screen name="Data" component={Data} />
-      <Tab.Screen name="Airtime" component={Airtime} />
-      <Tab.Screen name="Fund" component={Fund} />
-      <Tab.Screen name="Setting" component={Setting} />
+      <Tab.Screen name="History" component={HistoryScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Contact" component={ContactScreen} />
+      {/* <Tab.Screen name="Menu" component={MenuScreen} /> */}
     </Tab.Navigator>
   );
 }

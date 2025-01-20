@@ -4,9 +4,13 @@ import { Ionicons, FontAwesome, MaterialCommunityIcons } from 'react-native-vect
 import { useNavigation } from '@react-navigation/native'
 import { colors } from '../utility/colors';
 
-const HomeScreen = () => {
+const HomeScreen = ( ) => {
   // state to control visibilty of balance
   const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+
+  const data = () => {
+    navigation.navigate("DATA")
+  }
 
   // function to toggle the balance visibility
   const toggleBalanceVisibility = () => {
@@ -91,7 +95,7 @@ const HomeScreen = () => {
 
       <View style={styles.balanceContainer}>
         
-        <View style={styles.balanceContent}>
+        <View style={styles.balanceContent} >
           {/* <Text style={{color: "white", marginBottom: 5}}>Hi, Muhammad</Text> */}
           <Text style={styles.balanceText}>Available Balance</Text>
           
@@ -99,16 +103,13 @@ const HomeScreen = () => {
           <View style={{
                     display: 'flex', 
                     flexDirection: 'row', 
-                    justifyContent: 'space-between', 
                     alignItems: 'center'
                 }}>
               <Text 
                 style={styles.balanceText}>
                 {isBalanceVisible ? '₦0.00' : '***'}
               </Text>
-              {/* this will give space between the money digit and the eye icon */}
-              <View style={{width:10}}/>
-
+                <View style={{width:10}}></View>
               <TouchableOpacity 
                 onPress={toggleBalanceVisibility} 
                 style={{flexDirection: "row"}}>
@@ -119,8 +120,7 @@ const HomeScreen = () => {
                     color="white" 
                   />
               </TouchableOpacity>
-              {/* this will give space between the eye icon and referesh icon */}
-              <View style={{width:10}}/>
+              <View style={{width:5}}></View>
               <TouchableOpacity>
                 <Ionicons 
                   name="sync" 
@@ -157,33 +157,41 @@ const HomeScreen = () => {
       <Text style={styles.servicesTitle}>Available Services</Text>
       <View style={styles.servicesContainer}>
         <View style={styles.card}>
-        <TouchableOpacity style={styles.serviceItem}>
-            <Ionicons name="wifi" size={30} style={styles.serviceIcon} />
+        <TouchableOpacity style={styles.serviceItem} onPress={data}>
+            <Ionicons name="wifi" size={25} style={styles.serviceIcon} />
             <Text style={styles.serviceText}>Data</Text>
           </TouchableOpacity>
         <TouchableOpacity style={styles.serviceItem}>
-            <Ionicons name="call" size={30} style={styles.serviceIcon} />
+            <Ionicons name="call" size={25} style={styles.serviceIcon} />
             <Text style={styles.serviceText}>Airtime</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.serviceItem}>
-            <Ionicons name="cash" size={30} style={styles.serviceIcon} />
-            <Text style={styles.serviceText}>Airtime To Cash</Text>
+            <Ionicons name="cash" size={25} style={styles.serviceIcon} />
+            <Text style={styles.serviceText}>Airtime2Cash</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.serviceItem} onPress={navigateToBillScreen}>
-            <Ionicons name="bulb" size={30} style={styles.serviceIcon} />
-            <Text style={styles.serviceText}>Bill Payment</Text>
+            <Ionicons name="bulb" size={25} style={styles.serviceIcon} />
+            <Text style={styles.serviceText}>Electricity</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.serviceItem}>
-            <Ionicons name="tv" size={30} style={styles.serviceIcon} />
-            <Text style={styles.serviceText}>TV Subscription</Text>
+            <Ionicons name="tv" size={25} style={styles.serviceIcon} />
+            <Text style={styles.serviceText}>TV Cable</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.serviceItem}>
-            <FontAwesome name="graduation-cap" size={30} style={styles.serviceIcon} />
+            <FontAwesome name="graduation-cap" size={25} style={styles.serviceIcon} />
             <Text style={styles.serviceText}>Exam Pin</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.serviceItem}>
-            <Ionicons name="card-outline" size={30} style={styles.serviceIcon} />
+            <Ionicons name="card-outline" size={25} style={styles.serviceIcon} />
+            <Text style={styles.serviceText}>Data Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.serviceItem}>
+            <Ionicons name="card-outline" size={25} style={styles.serviceIcon} />
+            <Text style={styles.serviceText}>Data Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.serviceItem}>
+            <Ionicons name="card-outline" size={25} style={styles.serviceIcon} />
             <Text style={styles.serviceText}>Data Card</Text>
           </TouchableOpacity>
         </View>
@@ -216,21 +224,14 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5
   },
-  balanceContent: {
-    // marginBottom: 55,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  fundContent: {
-    alignItems: 'center'
-  },
+  
   icon: {
     color: 'white',
   },
   balanceText: {
     color: 'white',
     fontSize: 16,
-    textAlign: 'center',
+    // textAlign: 'center',
     marginVertical: 10
   },
   servicesTitle: {
@@ -243,29 +244,30 @@ const styles = StyleSheet.create({
   servicesContainer: {
     backgroundColor: 'white',
     borderRadius: 8,
-    // overflow: 'hidden',
-    // padding: 10,
-    // elevation: 4,
+    overflow: 'hidden',
+    padding: 10,
+    elevation: 4,
   },
   card: {
-    flexDirection: 'column',
-    // flexWrap: 'wrap',
-    // justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   serviceItem: {
-    backgroundColor: colors.primary,
-    borderRadius: 50,
-    width: '100%',
+    width: '30%',
     alignItems: 'center',
     marginBottom: 10,
   },
   serviceIcon: {
+    backgroundColor: colors.primary,
+    borderRadius: 50,
+    padding:5,
     color: colors.white,
   },
   serviceText: {
-    color: colors.white,
+    color: colors.dark,
     marginTop: 5,
-    fontSize: 30,
+    fontSize: 10,
     textAlign: 'center',
   },
   transactions: {

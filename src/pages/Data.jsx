@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Alert, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -90,21 +90,21 @@ export default function Data() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
       
         <View style={styles.formContainer}>
         <Text style={styles.heading}>Data Top Up</Text>
       <View style={styles.formGroup}>
         <Text style={styles.label}>
-          Network <Text style={styles.required}>*</Text>
+          Network
         </Text>
         <Picker
+        style={{borderColor:'red'}}
           selectedValue={networkId}
           onValueChange={(itemValue) => setNetworkId(itemValue)}
-          style={styles.input}
         >
           <Picker.Item  label="--Select Network--" value="" />
-          <Picker.Item label="MTN" value="1" />
+          <Picker.Item label="MTN" value="1"/>
           <Picker.Item label="Airtel" value="3" />
           <Picker.Item label="Glo" value="2" />
           <Picker.Item label="9Mobile" value="6" />
@@ -175,19 +175,19 @@ export default function Data() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingHorizontal: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: '#fff'
+    padding: 30,
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // backgroundColor: '#fff'
   },
   formContainer: {
     borderRadius: 15,
     marginTop: 15,
-    flexGrow: 1,
-    backgroundColor: colors.white,
+    // flexGrow: 1,
+    backgroundColor: 'lightblue',
     justifyContent: "center",
     alignItems: "center",
-    padding: 15
+    padding: 25
   },
   heading: {
     fontSize: 24,

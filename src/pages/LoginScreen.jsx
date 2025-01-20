@@ -12,7 +12,6 @@ const LoginScreen = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   // const navigateToSignUpScreen = () => {
   //   navigation.navigate("SIGNUP")
   // }
@@ -28,15 +27,19 @@ const LoginScreen = () => {
       password: password
     }
 
-    const endpoint = "http://192.168.56.1:8080/endpoints/mobileLogin.php";
+    const endpoint = "http://192.168.56.1:80/endpoints/mobileLogin.php";
 
     try{
         
-      const response = await axios.post(endpoint, formData);
-      console.warn(response.status);
+      const response = await axios.post(endpoint, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response);
       
     }catch (error) {
-      console.warn(error);
+      console.log(error);
     }
   }
 

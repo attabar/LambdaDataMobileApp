@@ -1,175 +1,98 @@
-import React, { useRef, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { SafeAreaView, Dimensions, StyleSheet, StatusBar, FlatList, View, Text, Image } from 'react-native';
+import {Text, ImageBackground, StyleSheet, View, TouchableOpacity, Dimensions} from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-const {width, height} = Dimensions.get('window');
+const image = require('../assets/hero.png');
 
-const COLORS = {primary: '#282534', white: '#fff'};
+// https://media.geeksforgeeks.org/wp-content/uploads/20220217151648/download3.png
 
-const slides = [
+const screenHeight = Dimensions.get('window').height
 
-    {
-        id: '1',
-        image: require('../assets/image1.png'),
-        title: 'Easy Top-ups Ahead!',
-        subtitle: 'Add funds instantly and start exploring' 
-    },
+const screenWidth = Dimensions.get('window').width
 
-    {
-        id: '2',
-        image: require('../assets/image2.jpeg'),
-        title: 'Top Up, Take Off!',
-        subtitle: 'Seamless virtual top-ups for hassle-free experience' 
-    },
 
-    {
-        id: '3',
-        image: require('../assets/image3.jpeg'),
-        title: 'Fuel Your Journey!',
-        subtitle: 'Quick, easy and secure virtual top-ups. Get started now!' 
+const OnboardingScreen = ({ navigation }) => {
+
+    const navigateToSignupScreen = () => {
+        navigation.navigate("SIGNUP")
     }
 
-];
+    const navigateToLoginScreen = () => {
+        navigation.navigate("LOGIN")
+    }
 
-const Slide = ({item}) => {
-    return (
-        <View style={{alignItems: 'center'}}>
-            <Image 
-                source={item.image} 
-                style={{height: "75%", width, resizeMode: 'contain'}}
-            />
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.subtitle}>{item.subtitle}</Text>
-            
-        </View>
-    )
-}
-
-const OnboardingScreen = ({navigation}) => {
-
-    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-    const ref = useRef(null);
-
-    const Footer = () => {
-        return (
-            <View 
-                style={{
-                    height: height * 0.25, 
-                    justifyContent: "space-between", 
-                    paddingHorizontal:20
-                }}>
-                <View 
-                    style={{
-                        flexDirection: "row", 
-                        justifyContent: "center", 
-                        marginTop: 20
-                    }}>
-                        {slides.map( (_, index) => (
-                            <View 
-                                key={index} 
-                                style={[
-                                    styles.indicator, 
-                                    currentSlideIndex == index && {
-                                        backgroundColor: COLORS.white,
-                                        width: 25
-                                    }
-                                ]}/>
-                        ))}
+    return(
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
+                <View>
+                    <ImageBackground 
+                        source={image}
+                        resizeMode='stretch' 
+                        style={styles.image}
+                    />
                 </View>
-                <View style={{marginBottom: 20}}>
-                    {
-                        currentSlideIndex == slides.length - 1 ?  <View style={{height: 50}}>
-                        <TouchableOpacity style={[styles.btn]} onPress={() => navigation.replace('SIGNUP')}>
-                            <Text style={{fontWeight: "bold", fontSize: 15}}>GET STARTED</Text>
+                <View style={{marginTop: 250}}>
+                    <Text style={styles.title}>
+                        Easy Top-ups Ahead!
+                    </Text>
+                    <Text style={styles.subtitle}>
+                        Add funds instantly and start exploring
+                    </Text>
+                    
+                    <View style={{marginTop: 20}}>
+                        <TouchableOpacity style={styles.button} onPress={navigateToSignupScreen}>
+                            <Text style={styles.buttonText}>SIGN UP</Text>
                         </TouchableOpacity>
-                    </View> : (
-                        <View style={{flexDirection: "row"}}>
-                        <TouchableOpacity onPress={skip} style={[styles.btn, {backgroundColor: "transparent", borderWidth: 1, borderColor: COLORS.white}]}>
-                            <Text style={{fontWeight: "bold", fontSize: 15, color: COLORS.white}}>SKIP</Text>
-                        </TouchableOpacity>
-                        <View style={{width: 50}}></View>
-                        <TouchableOpacity style={[styles.btn]} onPress={goNextSlide}>
-                            <Text style={{fontWeight: "bold", fontSize: 15}}>NEXT</Text>
+                        <TouchableOpacity style={styles.button} onPress={navigateToLoginScreen}>
+                            <Text style={styles.buttonText}>LOGIN</Text>
                         </TouchableOpacity>
                     </View>
-                    )
-                        
-                    }
-                    
+
                 </View>
-            </View>
-        )
-    }
-    const updatecurrentSlideIndex = e => {
-        const contentOffsetX = e.nativeEvent.contentOffset.x;
-        const currentIndex = Math.round(contentOffsetX / width);
-        setCurrentSlideIndex(currentIndex)
-    }
-    const goNextSlide = () => {
-        const nextSlideIndex = currentSlideIndex + 1;
-        if(nextSlideIndex != slides.length){
-            const offset = nextSlideIndex * width;
-            ref?.current?.scrollToOffset({offset});
-            setCurrentSlideIndex(nextSlideIndex)
-        }
-    }
-    const skip = () => {
-        const lastSlideIndex = slides.length - 1;
-        const offset = lastSlideIndex * width;
-        ref?.current?.scrollToOffset({offset});
-        setCurrentSlideIndex(lastSlideIndex)
-
-    }
-    return( 
-        <SafeAreaView style={{flex:1, backgroundColor:COLORS.primary}}>
-            <StatusBar style={{backgroundColor: COLORS.primary}} />
-            <FlatList 
-                ref={ref}
-                onMomentumScrollEnd={updatecurrentSlideIndex}
-                pagingEnabled
-                data={slides} 
-                contentContainerStyle={{height: height * 0.75}} 
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                renderItem={({item}) => <Slide item={item} />}
-            />
-            <Footer />
-        </SafeAreaView>
-
+            </SafeAreaView>
+        </SafeAreaProvider>
     )
 }
-// weruiop
+
 export default OnboardingScreen
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'green',
+        zIndex: 1
+    },
+    image: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: -1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: screenHeight,
+        width: screenWidth
+    },
     title: {
-        color: COLORS.white,
-        fontSize: 22,
+        fontSize: 24,
         fontWeight: 'bold',
-        marginTop: 20,
-        textAlign: 'center'
+        color: '#fff',
+        textAlign: 'center',
     },
     subtitle: {
-        color: COLORS.white,
-        fontSize: 13,
-        marginTop: 10,
-        maxWidth: '70%',
+        fontSize: 16,
+        color: '#fff',
         textAlign: 'center',
-        lineHeight: 23
-    }, 
-    indicator: {
-        height: 2.5,
-        width: 10,
-        backgroundColor: 'grey',
-        marginHorizontal: 3,
-        borderRadius: 2
+        marginTop: 10
     },
-    btn: {
-        flex: 1,
-        height: 50,
-        borderRadius: 5,
-        backgroundColor: COLORS.white, 
-        justifyContent: "center",
-        alignItems: "center"
+    button: {
+        backgroundColor: '#007BFF',
+        padding: 10,
+        marginHorizontal: 25,
+        marginVertical: 5,
+        borderRadius: 5
+    },
+    buttonText: {
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold'
     }
 })

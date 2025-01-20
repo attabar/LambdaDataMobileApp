@@ -5,6 +5,7 @@ import SignupScreen  from './src/pages/SignupScreen';
 import OnboardingScreen from './src/pages/OnboardingScreen';
 import { useEffect, useState } from 'react';
 import Splash from './splash';
+import Data from './src/pages/Data.jsx';
 import TabScreen from './src/pages/TabScreen.jsx';
 
 // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -44,6 +45,7 @@ export default function App() {
               <Stack.Screen name={"LOGIN"} component={LoginScreen} />
               <Stack.Screen name={"SIGNUP"} component={SignupScreen} />
               <Stack.Screen name={"TabScreen"} component={TabScreen} />
+              <Stack.Screen name={"DATA"} component={Data} />
             </Stack.Navigator>
         )}
         </NavigationContainer>
